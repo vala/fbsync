@@ -11,7 +11,7 @@ This is clearly meant to cover the following case :
 
 Add the gem to your app's `Gemfile` and `bundle install` :
 
-```rails
+```ruby
 gem "fbsync"
 ```
 
@@ -34,7 +34,7 @@ The way you get the short-lived token doesn't matter.
 For instance, say you signed in you user from facebook through omniauth,
 you can do the following in your omniauth callback :
 
-```rails
+```ruby
 class OmniauthCallbacksController
   def facebook
     token = FbSync::Token.create(value: request.env["omniauth.auth"].credentials.token)
@@ -49,7 +49,7 @@ end
 The Fbsync::Token model is ready to be associated to a `token_owner`,
 say a `User` model through a polymorphic association :
 
-```rails
+```ruby
 # app/models/user.rb
 class User < ActiveRecord::Base
   has_one :token, as: :token_owner, class_name: 'Fbsync::Token'
@@ -58,7 +58,7 @@ end
 
 Then in your omniauth callback you can store it as the following :
 
-```rails
+```ruby
 class OmniauthCallbacksController
   def facebook
     current_user.create_token FbSync::Token.create(value: request.env["omniauth.auth"].credentials.token)
@@ -73,7 +73,7 @@ If you don't want to manually fetch the token in your tasks and
 you only have one admin with a token, you can set the following property in the
 fbsync initializer :
 
-```rails
+```ruby
 Fbsync.config do |config|
   config.token_fetch_method = lambda {
     # Here we assume you have a single admin with an associated token
@@ -89,7 +89,7 @@ FbGraph::User and warn the admin of a posible expiration of his token.
 
 Say you want to run some job with a Rake task, you could do the following :
 
-```rails
+```ruby
 namespace :facebook do
   task fetch_albums: :environment do
     FbSync::Sync.run do |fb_user|
