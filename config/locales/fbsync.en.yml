@@ -1,0 +1,18 @@
+fr:
+  fbsync:
+    mailer:
+      token_expired:
+        subject: "Your application's Facebook token has expired"
+        content: |
+          The Facebook token used to pull your Facebook account data has expired.
+          You can update it from your administration panel by clicking on the following link :
+          %{url}
+          (If you can't click on this link, you can copy it and paste in in your browser's address bar)
+      token_expires_soon:
+        subject: "Your application's Facebook token is close to expiration"
+        content: |
+          The Facebook token used to pull your Facebook account is close to expiration.
+          You can update it from your administration panel by clicking on the following link :
+          %{url}
+          (If you can't click on this link, you can copy it and paste in in your browser's address bar)
+      footer: "This e-mail was automatically generated, please do not answer to it"

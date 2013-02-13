@@ -1,0 +1,23 @@
+fr:
+  fbsync:
+    mailer:
+      token_expired:
+        subject: "Le token Facebook de votre application a expiré"
+        content: |
+          Le token Facebook permettant de récupérer les informations depuis votre compte Facebook a expiré.
+          Vous pouvez mettre à jour celui-ci depuis votre interface d'administration à l'adresse suivante :
+          %{url}
+          (Si vous ne pouvez pas cliquer sur le lien, vous pouvez le copier dans la barre d'adresse de votre navigateur)
+      token_expires_soon:
+        subject: "Le token Facebook de votre application est bientôt expiré"
+        content: |
+          Le token Facebook permettant de récupérer les informations depuis votre compte Facebook va bientôt expirer.
+          Vous pouvez mettre à jour celui-ci depuis votre interface d'administration à l'adresse suivante :
+          %{url}
+          (Si vous ne pouvez pas cliquer sur le lien, vous pouvez le copier dans la barre d'adresse de votre navigateur)
+      footer: "Cet e-mail est généré automatiquement, merci de ne pas y répondre"
+
+    models:
+      errors:
+        token:
+          invalid_token: "Le Token n'est pas ou plus valide, celui-ci expire le : %{expires_at}"

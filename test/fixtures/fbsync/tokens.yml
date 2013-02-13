@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  value: MyString
+  token_owner_id: 1
+  token_owner_type: MyString
+  last_expiration_reminder: 2013-02-12 19:13:11
+
+two:
+  value: MyString
+  token_owner_id: 1
+  token_owner_type: MyString
+  last_expiration_reminder: 2013-02-12 19:13:11
