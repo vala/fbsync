@@ -77,7 +77,7 @@ fbsync initializer :
 Fbsync.config do |config|
   config.token_fetch_method = lambda {
     # Here we assume you have a single admin with an associated token
-    User.includes(:token).where('admin = ?, fbsync_token.id NOT NULL', true).first.token
+    User.includes(:token).where('admin = ?, fbsync_tokens.id NOT NULL', true).first.token
   }
 end
 ```
@@ -85,15 +85,16 @@ end
 ## Using the Fbsync::Sync#run method
 
 The goal of all this configuration, is to allow you to run operations with a
-FbGraph::User and warn the admin of a posible expiration of his token.
+long-lived token and warn the admin of a posible expiration of his token.
 
 Say you want to run some job with a Rake task, you could do the following :
 
 ```ruby
 namespace :facebook do
   task fetch_albums: :environment do
-    FbSync::Sync.run do |fb_user|
-      # User fb_user to fetch albums here
+    FbSync::Sync.run do |token|
+      user = FbGraph::User.me(token)
+      # Use fb_user to fetch albums here
     end
   end
 end

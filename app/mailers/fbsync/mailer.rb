@@ -13,7 +13,7 @@ module Fbsync
     private
 
     def subject key
-      "[#{ Fbsync.email_application_prefix }] #{ I18n.t("fbsync.mailer.#{ key }.subject") }"
+      "[#{ Fbsync.email_application_prefix }] #{ I18n.t("fbsync.mailer.#{ key }.subject") }"
     end
   end
 end

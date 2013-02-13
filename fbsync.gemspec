@@ -17,9 +17,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.12"
-  s.add_dependency "devise"
-  s.add_dependency 'omniauth'
-  s.add_dependency 'omniauth-facebook'
   s.add_dependency "fb_graph"
 
   s.add_development_dependency "sqlite3"

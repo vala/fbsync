@@ -7,21 +7,24 @@ module Fbsync
       # work on.
       # This method ensures the token admin is aware
       #
+      # @param  [Fbsync::Token]  token  The token object to deal with
       #
       def run token = nil, &block
         token ||= Fbsync.token_fetch_method.call
 
         if token.active?
           # Remind if necessary
-          if token.expires_soon? && !token.expiration_reminded?
-            Mailer.token_expires_soon(sync)
-          end
-          # Build Facebook user from token
-          user = FbGraph::User.me(token.value)
+          #
+          # Pre-expiry reminder doesn't work because of this issue :
+          # http://developers.facebook.com/bugs/511955848814498
+          #
+          # if token.expires_soon? && !token.expiration_reminded?
+          #   Fbsync::Mailer.token_expires_soon(token)
+          # end
           # Execute passed block
-          block.call(user)
+          block.call(token.value)
         elsif !token.reminded_since_expiration?
-          Mailer.token_expired(sync)
+          Fbsync::Mailer.token_expired(token)
         end
       end
     end
