@@ -77,7 +77,7 @@ fbsync initializer :
 Fbsync.config do |config|
   config.token_fetch_method = lambda {
     # Here we assume you have a single admin with an associated token
-    User.includes(:token).where('admin = ?, fbsync_tokens.id NOT NULL', true).first.token
+    User.includes(:token).where('admin = ? AND fbsync_tokens.id NOT NULL', true).first.token
   }
 end
 ```
@@ -93,10 +93,8 @@ Say you want to run some job with a Rake task, you could do the following :
 namespace :facebook do
   task fetch_albums: :environment do
     FbSync::Sync.run do |token|
-      user = FbGraph::User.me(token)
-      # Use fb_user to fetch albums here
+      # Use the long-lived token here
     end
   end
 end
 ```
-
